@@ -1,0 +1,5 @@
+
+config BR2_PACKAGE_AESD_LLD
+	bool "aesd-lld"
+	help
+        Includes misc-modules and scull modules.
