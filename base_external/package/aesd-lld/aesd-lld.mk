@@ -11,6 +11,7 @@ AESD_LLD_SITE_METHOD = git
 AESD_LLD_GIT_SUBMODULES = YES
 
 AESD_LLD_MODULE_SUBDIRS = misc-modules scull
+AESD_LLD_MODULE_MAKE_OPTS = KERNELDIR=$(LINUX_DIR)
 
 $(eval $(kernel-module))
 $(eval $(generic-package))
