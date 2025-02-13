@@ -12,7 +12,7 @@ case "$1" in
         fi
 
         # Load scull driver
-        insmod /lib/modules/"$(uname -r)"/extra/scull.ko || exit 1
+        /sbin/insmod /lib/modules/"$(uname -r)"/extra/scull.ko || exit 1
         major=$(awk "\$2==\"scull\" {print \$1}" /proc/devices)
         rm -f /dev/scull[0-3]
         mknod /dev/scull0 c "$major" 0
@@ -53,7 +53,7 @@ case "$1" in
         chmod $mode  /dev/scullpriv
 
         # Load faulty driver
-        insmod /lib/modules/"$(uname -r)"/extra/faulty.ko || exit 1
+        /sbin/insmod /lib/modules/"$(uname -r)"/extra/faulty.ko || exit 1
         major=$(awk "\$2==\"faulty\" {print \$1}" /proc/devices)
         rm -f /dev/faulty
         mknod /dev/faulty c "$major" 0
@@ -61,13 +61,13 @@ case "$1" in
         chmod $mode /dev/faulty
 
         # Load hello module
-        depmod -a
-        modprobe hello || exit 1
+        /sbin/depmod -a
+        /sbin/modprobe hello || exit 1
         ;;
 
     stop)
         # Remove scull driver
-        rmmod scull || exit 1
+        /sbin/rmmod scull || exit 1
         rm -f /dev/scull /dev/scull[0-3] 
         rm -f /dev/scullpriv
         rm -f /dev/scullpipe /dev/scullpipe[0-3]
@@ -76,11 +76,11 @@ case "$1" in
         rm -f /dev/scullwuid
 
         # Remove faulty driver
-        rmmod faulty || exit 1
+        /sbin/rmmod faulty || exit 1
         rm -f /dev/faulty
 
         # Remove hello module
-        rmmod hello || exit 1
+        /sbin/rmmod hello || exit 1
         ;;
 
     *)
