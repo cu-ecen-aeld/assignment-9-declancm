@@ -63,6 +63,9 @@ case "$1" in
         # Load hello module
         /sbin/depmod -a
         /sbin/modprobe hello || exit 1
+
+        # Load aesd-char-driver
+        ./usr/bin/aesdchar_load
         ;;
 
     stop)
@@ -81,6 +84,9 @@ case "$1" in
 
         # Remove hello module
         /sbin/rmmod hello || exit 1
+
+        # Remove aesd-char-driver
+        ./usr/bin/aesdchar_unload
         ;;
 
     *)
